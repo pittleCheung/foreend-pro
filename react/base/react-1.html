@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React核心库 与宿主环境无关 React对象--><!-- crossorigin 跨域 -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <!-- 依赖核心库,将核心的功能与页面结合 ReactDOM对象 -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- 转义jsx -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- <script src="./reactDev.js"></script> -->
+    <!-- <script src="./reactDom.js"></script> -->
+
+    <script>
+      // ReactDOM.render(显示的东西,容器);
+      // ReactDOM.render('Hello World',document.getElementById('root'));
+
+      // var span = React.createElement('span',{},'一个span元素'); //普通的js对象
+      // var h1 = React.createElement('h1',{
+      // 	title:'第一个react'
+      // },'Hello','World',span);
+      // ReactDOM.render(h1,document.getElementById('root')); //将普通的js对象转为真实对象
+    </script>
+
+    <!-- 利用babel负责编译成js 不直接用浏览器识别js-->
+    <script type="text/babel ">
+      //创建一个span元素
+      // var span = React.createElement('span',{},'一个span元素');
+      // var span = <span>一个span元素</span> //这行代码是上面这行的语法糖
+      // console.log(span);
+      // ReactDOM.render(span,document.getElementById('root'));
+
+      const content = '<h1>I Love you very much <p>Do you like me?</p></h1>';
+      const h1 = (
+        <li>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: content,
+            }}
+          ></div>
+        </li>
+      );
+      ReactDOM.render(h1, document.getElementById('root'));
+    </script>
+  </body>
+</html>

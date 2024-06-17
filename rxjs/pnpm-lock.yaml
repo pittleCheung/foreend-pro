@@ -1,0 +1,25 @@
+lockfileVersion: 5.4
+
+specifiers:
+  pittle: ^1.0.0
+  rxjs: ^7.8.1
+
+dependencies:
+  pittle: 1.0.0
+  rxjs: 7.8.1
+
+packages:
+
+  /pittle/1.0.0:
+    resolution: {integrity: sha512-z5KdU12hhHuXHwAXNg32fzpa7btqXYhb2RMSHUBHQ5zlgqwDsydzK08kTsi88HOJEE1Q6l5O7/2rAl+BHHPUrw==}
+    dev: false
+
+  /rxjs/7.8.1:
+    resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}
+    dependencies:
+      tslib: 2.6.2
+    dev: false
+
+  /tslib/2.6.2:
+    resolution: {integrity: sha512-AEYxH93jGFPn/a2iVAwW87VuUIkR1FVUKB77NwMF7nBTDkDrrT/Hpt/IrCJ0QXhW27jTBDcf5ZY7w6RiqTMw2Q==}
+    dev: false

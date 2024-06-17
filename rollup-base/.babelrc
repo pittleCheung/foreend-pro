@@ -1,0 +1,10 @@
+{
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "modules": false // 可以将esmodule转换为commonjs  这里false表示不需要转换
+      }
+    ]
+  ]
+}

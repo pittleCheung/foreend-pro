@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug ioc",
+      "type": "node",
+      "request": "launch",
+      "runtimeArgs": ["-r", "ts-node/register"],
+      "args": ["./ioc/index.spec.ts"],
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "/Users/pittle/.nvm/versions/node/v18.14.2/bin/node"
+    }
+  ]
+}

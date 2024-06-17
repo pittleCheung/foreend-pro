@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="#/a">A应用</a>
+    <a href="#/a">B应用</a>
+    <script src="https://cdn.bootcdn.net/ajax/libs/single-spa/5.9.0/umd/single-spa.min.js"></script>
+
+    <script type="module">
+      const { registerApplication, start } = singleSpa
+
+      // import { registerApplication, start } from "./single-spa.js"
+      const customProps = { name: "pittle" }
+
+      let app1 = {
+        bootstrap: () => Promise.resolve(customProps),
+        mounted: () => Promise.resolve(customProps),
+        unmounted: () => Promise.resolve(customProps),
+      }
+
+      registerApplication(
+        "app1", // 用来过滤防止加载重复的应用
+        () => Promise.resolve(customProps),
+        (location) => location.hash === "#/a", // 路径匹配上后加载应用
+        customProps, //自定义属性
+      )
+
+      // let app2 = {
+      //   bootstrap: [
+      //     async (customProps) => {
+      //       console.log("app2 启动~1")
+      //     },
+      //     // async () => {
+      //     //   console.log("app2 启动~2")
+      //     // },
+      //   ],
+      //   mounted: async (customProps) => {
+      //     console.log("app2 mount")
+      //   },
+      //   unmounted: async (customProps) => {
+      //     console.log("app2 unmounted")
+      //   },
+      // }
+
+      // registerApplication(
+      //   "app2", // 用来过滤防止加载重复的应用
+      //   async () => {
+      //     return app2 //System.import("@pittle/react")
+      //   },
+      //   (location) => location.hash === "#/b", // 路径匹配上后加载应用
+      //   customProps, //自定义属性
+      // )
+
+      start()
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "ast-parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "test": "vitest",
+    "dev": "nodemon --exec ts-node ./src/test.ts --watch "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.15.11",
+    "esbuild-darwin-arm64": "^0.14.28",
+    "vitest": "^0.7.12"
+  },
+  "dependencies": {
+    "util": "^0.12.5"
+  }
+}

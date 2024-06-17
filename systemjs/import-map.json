@@ -1,0 +1,6 @@
+{
+  "imports": {
+    "/app/helper": "node_modules/helper/index.mjs",
+    "lodash": "/node_modules/lodash-es/lodash.js"
+  }
+}

@@ -1,0 +1,29 @@
+Node {
+  type: 'ImportDeclaration',
+  start: 0,
+  end: 22,
+  loc: SourceLocation {
+    start: Position { line: 1, column: 0 },
+    end: Position { line: 1, column: 22 }
+  },
+  range: [0, 22],
+  specifiers: [
+      Node {
+        type: 'ImportDefaultSpecifier',
+        start: 7,
+        end: 8,
+        loc: [SourceLocation],
+        range: [Array],
+        local: [Node]
+      }
+   ],
+   source: Node {
+      type: 'Literal',
+      start: 14,
+      end: 22,
+      loc: SourceLocation { start: [Position], end: [Position] },
+      range: [14, 22],
+      value: 'jquery',
+      raw: '"jquery"'
+   }
+}

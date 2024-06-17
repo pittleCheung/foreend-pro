@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": false, //禁用自动生成声明文件
+    "removeComments": false, // 干掉注释
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true, //emitDecoratorMetadata/experimentalDecorators这些选项启用对装饰器的支持，装饰器是一种语言特性，用于修改类及其成员的行为。
+    "allowJs": true,
+    "target": "es2017",
+    "sourceMap": true, // 当设置为 true 时，此选项生成源映射，使您可以在浏览器或像 Visual Studio Code 这样的开发环境中调试 TypeScript 代码。
+    "outDir": "./dist", // 指定编译文件的输出目录。
+    "baseUrl": "./", // 指定解析非相对模块名称的基本目录。
+    "incremental": true // 此选项启用增量编译，这意味着 TypeScript 只会重新编译更改过的文件和其依赖项，而不是重新编译整个项目。
+  },
+  "exclude": ["node_modules", "dist"]
+}

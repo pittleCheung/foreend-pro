@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="module">
+      var blob = new Blob(["123"])
+
+      var file = new File(["123"], "123.txt")
+
+      console.log(blob, file)
+
+      console.log(await blob.arrayBuffer())
+
+      // console.log(await file.arrayBuffer())
+
+      const fr = new FileReader()
+      fr.onload = function (e) {
+        console.log(fr.result)
+        console.log(e.target.result)
+      }
+      fr.readAsArrayBuffer(file)
+
+      // blob or arraybuffer 只读不能修改 需要使用dateView进行修改
+
+      const dv = new DataView(await blob.arrayBuffer())
+      console.log(dv)
+      console.log(dv.getUint8(1))
+      dv.setUint8(1, 65) //把第一个字节改成65
+
+      console.log(dv.getInt8(1), dv.getUint8(1))
+    </script>
+  </body>
+</html>

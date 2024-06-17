@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "react": "https://unpkg.com/react@18/umd/react.production.min.js",
+          "react-dom": "https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+        }
+      }
+    </script>
+    <div id="root"></div>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/systemjs@6.8.3/dist/system.min.js"></script> -->
+    <script>
+      // 这里可以动态加载模块 可以加载远程链接
+      // AMD 依赖前置 引入index.js的时候 需要先加载react 和 react-dom
+      function SystemJS() {}
+
+      SystemJS.prototype.import = function (id) {
+        return new Promise((resolve, reject) => {
+          const lastSepIndex = window.location.href.lastIndexOf("/");
+          const baseURL = location.href.slice(0, lastSepIndex + 1);
+          if (id.startsWith("./")) {
+            resolve(baseURL + id.slice(2));
+          }
+        }).then((id) => {
+          let exec;
+          return load(id)
+            .then((registerition) => {
+              // console.log(registerition);
+              function _export() {}
+              let declared = registerition[1](_export); // {setters:[],execute:function(){}}
+              // 加载react 和 react-dom 加载完毕后调用setters
+              // 调用完成后执行execute
+              exec = declared.execute;
+              return [registerition[0], declared.setters];
+            })
+            .then((info) => {
+              return Promise.all(
+                info[0].map((dep, i) => {
+                  // info[0] === ['react路径','react-dom路径']
+                  // console.log(dep);
+                  var setter = info[1][i];
+                  // react和react-dom会给全局增添属性window.React window.ReactDOM
+                  return load(dep)
+                    .then((r) => {
+                      // console.log(r);
+                      // 每次加载完成获取到window上添加的属性
+                      let p = getGlobalLastPro();
+                      // console.log(p, "ppppppp");
+                      setter(p); // 传入加载后的文件
+                    })
+                    .then(exec);
+                })
+              );
+            });
+        });
+      };
+
+      // 先存一下window上面的属性
+      let set = new Set();
+      const saveGlobalPro = () => {
+        for (let p in window) {
+          set.add(p);
+        }
+      };
+      // react 和 react-dom加载完成会在window上注入属性React和ReactDom属性
+
+      const getGlobalLastPro = () => {
+        let result;
+        let newresult = { default: {} };
+        for (let p in window) {
+          if (set.has(p)) continue;
+          // set.add(p);
+          result = window[p];
+          newresult.default = result;
+        }
+        return newresult; // 每次都遍历到最后拿到最后一个属性
+      };
+      saveGlobalPro();
+
+      let lastRegister;
+      // 将本次注册的依赖和声明暴露到外部
+      SystemJS.prototype.register = function (deps, declare) {
+        lastRegister = [deps, declare];
+      };
+
+      function load(id) {
+        return new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = id;
+          script.async = true;
+          document.head.appendChild(script);
+          script.addEventListener("load", function () {
+            console.log("脚本加载完成");
+            // console.log(lastRegister);
+            // 加载后拿到依赖和回调
+            let _lastRegister = lastRegister;
+            lastRegister = undefined;
+            if (!_lastRegister) {
+              resolve([], function () {}); // 表示没有其他依赖
+            }
+            resolve(_lastRegister);
+          });
+        });
+      }
+
+      let System = new SystemJS();
+
+      System.import("./index.js").then((res) => {});
+    </script>
+  </body>
+</html>
